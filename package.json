@@ -1,0 +1,23 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "Command-line application to dynamically generate Read Me files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grudgecat/readme-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grudgecat/readme-generator/issues"
+  },
+  "homepage": "https://github.com/grudgecat/readme-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.1"
+  }
+}
