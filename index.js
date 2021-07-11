@@ -3,7 +3,18 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
 
-let answers = [];
+// let answers = [];
+
+let fullName = "";
+let filename = "";
+let description = "";
+let installation = "";
+let usage = "";
+let license = "";
+let contributing = "";
+let tests = "";
+let githubName = "";
+let email = "";
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -63,43 +74,43 @@ const questions = [
 inquirer  
   .prompt(questions)
   .then((data) => {
-    const fullName = `${data.fullName}`;
-    const filename = `${data.title.toLowerCase().split(' ').join('')}`;
-    const description = `${data.description}`;
-    const installation = `${data.installation}`;
-    const usage = `${data.usage}`;
-    const license = `${data.license}`;
-    const contributing = `${data.contributing}`;
-    const tests = `${data.tests}`;
-    const githubName = `${data.githubName}`;
-    const email = `${data.email}`;
+     fullName = `${data.fullName}`;
+     filename = `${data.title.toLowerCase().split(' ').join('')}`;
+     description = `${data.description}`;
+     installation = `${data.installation}`;
+     usage = `${data.usage}`;
+     license = `${data.license}`;
+     contributing = `${data.contributing}`;
+     tests = `${data.tests}`;
+     githubName = `${data.githubName}`;
+     email = `${data.email}`;
 
-    answers.push(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email);
-    showMe();
-    init(); 
+    // answers.push(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email);
+    // showMe();
+    init(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email); 
   })
 .catch((error) => {
   console.log(error);
 });
 
-function showMe() {
-console.log(answers);
-console.log('first item at 0: ', answers[0]); 
-}
+// function showMe() {
+// console.log(answers);
+// }
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  fs.writeFile(fileName,`
-      OUTPUT MARKDOWN GOES HERE
+  filepath=`./${fileName}`
+  fs.writeFile(filepath,`
+      ${data}
       `, (err) => 
       err ? console.error(err) : console.log('Success!'))
 }
 
 // TODO: Create a function to initialize app
-function init() {
-  // THEN CREATE TEXT FOR README FILE - CALL GENERATE MARKDOWN(ANSWERS) STORE IN MARKDOWNTEXT
-  generateMarkdown(answers);
-  // USE GENERATED MARKDOWN TEXT - call writeToFile - TO WRITE TO FILE
-
+function init(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email) {
+  //create text block for readme file
+  let response = generateMarkdown(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email);
+  //use text block to generate readme file
+  writeToFile(fileName, response);
 }
 

@@ -144,14 +144,14 @@ function renderEndofDoc(contributing, tests, githubName, email) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(answers) {
+function generateMarkdown(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email) {
   let markdownText = "";
 
-  const titleSection = renderLicenseSection(license, fullName);
-  const badgeSection = renderLicenseBadge(license);
-  const bodySection = renderBody(description, installation, usage);
-  const licenseSection = renderLicenseSection(license, fullName);
-  const endOfDocSection = renderEndofDoc(contributing, tests, githubName, email);
+  let titleSection = renderLicenseSection(license, fullName);
+  let badgeSection = renderLicenseBadge(license);
+  let bodySection = renderBody(description, installation, usage);
+  let licenseSection = renderLicenseSection(license, fullName);
+  let endOfDocSection = renderEndofDoc(contributing, tests, githubName, email);
 
   markdownText.concat(titleSection, badgeSection, bodySection, licenseSection, endOfDocSection);
   console.log(markdownText);
