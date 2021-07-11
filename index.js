@@ -3,8 +3,6 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
 
-// let answers = [];
-
 let fullName = "";
 let fileName = "";
 let description = "";
@@ -85,21 +83,15 @@ inquirer
      githubName = `${data.githubName}`;
      email = `${data.email}`;
 
-    // answers.push(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email);
-    // showMe();
     init(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email); 
   })
 .catch((error) => {
   console.log(error);
 });
 
-// function showMe() {
-// console.log(answers);
-// }
-
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  filepath=`./${fileName}`
+  filepath=`./output/${fileName}`
   fs.writeFile(filepath,`
       ${data}
       `, (err) => 
@@ -111,6 +103,6 @@ function init(fullName, fileName, description, installation, usage, license, con
   //create text block for readme file
   let response = generateMarkdown(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email);
   //use text block to generate readme file
-  writeToFile(fileName, response);
+  writeToFile(fileName, response); 
 }
 

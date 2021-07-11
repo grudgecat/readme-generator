@@ -3,25 +3,25 @@
 function renderLicenseBadge(gmLicense) {
   switch (gmLicense) {
     case 'Apache':
-      return `[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)]`;
+      return `![License Apache](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)`;
       break;
     case 'Boost':
-      return `[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)]`;
+      return `![License Boost](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)`;
       break;
     case 'BSD':
-      return `[![License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)]`;
+      return `![License BSD](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)`;
       break;
     case 'GNU_GPLv2':
-      return `[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)]`;
+      return `![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)`;
       break;
     case 'GNU_GPLv3':
-      return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)]`;
+      return `![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)`;
       break;
     case 'MIT':
-      return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]`;
+      return `![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)`;
       break;
     default:
-      return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)]`;
+      return `![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)`;
   }
 }
 
@@ -60,87 +60,100 @@ function renderLicenseSection(gmLicense, username) {
 
   switch(gmLicense) {
     case 'Apache':
-      return `
+      return `  
 
-      ${badge} 
-      Copyright 2021 ${username}
+## License  
+   
+${badge}  
+Copyright 2021 ${username}  
 
-      Licensed under the Apache License, Version 2.0 (the "License");
-      you may not use this file except in compliance with the License.
-      You may obtain a copy of the License at
-
-          ${link}
-
-      Unless required by applicable law or agreed to in writing, software
-      distributed under the License is distributed on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      See the License for the specific language governing permissions and
-      limitations under the License.
-      `;
+Licensed under the Apache License, Version 2.0 (the "License");  
+you may not use this file except in compliance with the License.  
+You may obtain a copy of the License at  
+  
+${link}  
+  
+Unless required by applicable law or agreed to in writing, software  
+distributed under the License is distributed on an "AS IS" BASIS,  
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+See the License for the specific language governing permissions and  
+limitations under the License.  
+`;
       break;
     case 'Boost':
-      return `        ${badge} ${link}`;
+      return `## License  
+${badge}  
+${link}  
+`;
       break;
     case 'BSD':
-      return `        ${badge} ${link}`;
+      return `${badge} ${link}`;
       break;
     case 'GNU_GPLv2':
-      return `        ${badge} ${link}`;
+      return `${badge} ${link}`;
       break;
     case 'GNU_GPLv3':
-      return `        ${badge} ${link}`;
+      return `${badge} ${link}`;
       break;
     case 'MIT':
-      return `        ${badge} ${link}`;
+      return `${badge} ${link}`;
       break;
     default:
-      return `        ${badge} ${link}`;
+      return `${badge} ${link}`;
   }
 }
 
 //call with variable filename
 function renderTitleSection(gmTitle) {
-  return `#  ${gmTitle}
+  return `  
+# Project: ${gmTitle}  
 
-  `;
+
+`;
 }
 
 function renderBody(gmDescription, gmInstallation, gmUsage) {
-  return `
-  ## Description
-  ${gmDescription}
+  return `    
+## Description  
+${gmDescription}  
 
-  ## Table of Contents
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [License](#license)
-  - [Contribution Guidelines](#contribution-guidelines)
-  - [Test Instructions](#test-instructions)
-  - [Questions](#questions)
 
-  ## Installation
-  ${gmInstallation}
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Test Instructions](#test-instructions)
+- [Questions](#questions)
 
-  ## Usage
-  ${gmUsage}
 
-  `;
+## Installation  
+${gmInstallation}  
+
+
+## Usage  
+${gmUsage}  
+
+
+`;
 }
 
 function renderEndofDoc(gmContributing, gmTests, gmGithubName, gmEmail) {
-  return `
-  ## Contribution Guidelines 
-  ${gmContributing}
+  return `## Contribution Guidelines  
+${gmContributing}  
 
-  ## Test Instructions
-  ${gmTests}
 
-  ## Questions and Contact Info
-  GitHub Name: ${gmGithubName}
-  GitHub Profile: https://github.com/${gmGithubName}
-  For questions regarding this project, please contact me by email at ${gmEmail}. 
-  Thank you for your intrest.
-    `;
+## Test Instructions  
+${gmTests}  
+
+
+
+## Questions    
+GitHub Name: ${gmGithubName}  
+GitHub Profile: https://github.com/${gmGithubName}  
+For questions regarding this project, please contact me by email at ${gmEmail}.  
+Thank you for your intrest.  
+`;
 }
 
 // TODO: Create a function to generate markdown for README
@@ -164,16 +177,17 @@ function generateMarkdown(fulln, filen, descr, inst, usg, licn, contr, tst, ghn,
   let licenseSection = renderLicenseSection(licn, fulln);
   let endOfDocSection = renderEndofDoc(contr, tst, ghn, eml);
 
-  // console.log(titleSection);
+  // console.log(titleSection); 
   // console.log(badgeSection);
   // console.log(bodySection);
   // console.log(licenseSection);
   // console.log(endOfDocSection);
 
   // markdownText.concat(titleSection, badgeSection, bodySection, licenseSection, endOfDocSection); 
+  // markdownText = (titleSection.trim() + '<br />' + badgeSection.trim() + '<br />' + bodySection.trim()  + '<br />' + licenseSection.trim() + '<br />' + endOfDocSection.trim()); 
   markdownText = (titleSection + badgeSection + bodySection + licenseSection + endOfDocSection); 
-  // console.log(markdownText); 
-  return markdownText;
+  console.log(markdownText); 
+  return markdownText; 
 }
 
 module.exports = generateMarkdown;
