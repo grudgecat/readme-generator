@@ -6,7 +6,7 @@ const generateMarkdown = require("./utils/generateMarkdown");
 // let answers = [];
 
 let fullName = "";
-let filename = "";
+let fileName = "";
 let description = "";
 let installation = "";
 let usage = "";
@@ -75,7 +75,7 @@ inquirer
   .prompt(questions)
   .then((data) => {
      fullName = `${data.fullName}`;
-     filename = `${data.title.toLowerCase().split(' ').join('')}`;
+     fileName = `${data.title.toLowerCase().split(' ').join('')}`;
      description = `${data.description}`;
      installation = `${data.installation}`;
      usage = `${data.usage}`;
@@ -85,9 +85,9 @@ inquirer
      githubName = `${data.githubName}`;
      email = `${data.email}`;
 
-    // answers.push(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email);
+    // answers.push(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email);
     // showMe();
-    init(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email); 
+    init(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email); 
   })
 .catch((error) => {
   console.log(error);
@@ -107,9 +107,9 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email) {
+function init(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email) {
   //create text block for readme file
-  let response = generateMarkdown(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email);
+  let response = generateMarkdown(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email);
   //use text block to generate readme file
   writeToFile(fileName, response);
 }

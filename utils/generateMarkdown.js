@@ -1,7 +1,7 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  switch (license) {
+function renderLicenseBadge(gmLicense) {
+  switch (gmLicense) {
     case 'Apache':
       return `[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)]`;
       break;
@@ -26,8 +26,8 @@ function renderLicenseBadge(license) {
 }
 
 // TODO: Create a function that returns the license link
-function renderLicenseLink(license) {
-  switch(license) {
+function renderLicenseLink(gmLicense) {
+  switch(gmLicense) {
     case 'Apache':
       return `http://www.apache.org/licenses/LICENSE-2.0`;
       break;
@@ -38,10 +38,10 @@ function renderLicenseLink(license) {
         return `https://opensource.org/licenses/BSD-3-Clause`;
         break;
       case 'GNU_GPLv2':
-        return `        ${badge} ${link}`;
+        return `https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html`;
         break;
       case 'GNU_GPLv3':
-        return `        ${badge} ${link}`;
+        return `https://www.gnu.org/licenses/gpl-3.0`;
         break;
       case 'MIT':
         return `https://opensource.org/licenses/MIT`;
@@ -53,17 +53,17 @@ function renderLicenseLink(license) {
 
 
 // TODO: Create a function that returns the license section of README
-function renderLicenseSection(license, fullName) {
+function renderLicenseSection(gmLicense, username) {
 
-  const badge = renderLicenseBadge(license);
-  const link = renderLicenseLink(license);
+  const badge = renderLicenseBadge(gmLicense);
+  const link = renderLicenseLink(gmLicense);
 
-  switch(license) {
+  switch(gmLicense) {
     case 'Apache':
       return `
 
       ${badge} 
-      Copyright 2021 ${fullName}
+      Copyright 2021 ${username}
 
       Licensed under the Apache License, Version 2.0 (the "License");
       you may not use this file except in compliance with the License.
@@ -99,16 +99,16 @@ function renderLicenseSection(license, fullName) {
 }
 
 //call with variable filename
-function renderTitleSection(title) {
-  return `#  ${title}
+function renderTitleSection(gmTitle) {
+  return `#  ${gmTitle}
 
   `;
 }
 
-function renderBody(description, installation, usage) {
+function renderBody(gmDescription, gmInstallation, gmUsage) {
   return `
   ## Description
-  ${description}
+  ${gmDescription}
 
   ## Table of Contents
   - [Installation](#installation)
@@ -119,42 +119,61 @@ function renderBody(description, installation, usage) {
   - [Questions](#questions)
 
   ## Installation
-  ${installation}
+  ${gmInstallation}
 
   ## Usage
-  ${usage}
+  ${gmUsage}
 
   `;
 }
 
-function renderEndofDoc(contributing, tests, githubName, email) {
+function renderEndofDoc(gmContributing, gmTests, gmGithubName, gmEmail) {
   return `
   ## Contribution Guidelines 
-  ${contributing}
+  ${gmContributing}
 
   ## Test Instructions
-  ${tests}
+  ${gmTests}
 
   ## Questions and Contact Info
-  GitHub Name: ${githubName}
-  GitHub Profile: https://github.com/${githubName}
-  For questions regarding this project, please contact me by email at ${email}. 
+  GitHub Name: ${gmGithubName}
+  GitHub Profile: https://github.com/${gmGithubName}
+  For questions regarding this project, please contact me by email at ${gmEmail}. 
   Thank you for your intrest.
     `;
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(fullName, filename, description, installation, usage, license, contributing, tests, githubName, email) {
+function generateMarkdown(fulln, filen, descr, inst, usg, licn, contr, tst, ghn, eml) {
   let markdownText = "";
 
-  let titleSection = renderLicenseSection(license, fullName);
-  let badgeSection = renderLicenseBadge(license);
-  let bodySection = renderBody(description, installation, usage);
-  let licenseSection = renderLicenseSection(license, fullName);
-  let endOfDocSection = renderEndofDoc(contributing, tests, githubName, email);
+  // console.log('fullname: ', fulln);
+  // console.log('filename: ', filen);
+  // console.log('description: ', descr);
+  // console.log('instrucitons: ', inst);
+  // console.log('usage: ', usg);
+  // console.log('license chosen: ', licn);
+  // console.log('contribution: ', contr);
+  // console.log('testing: ', tst);
+  // console.log('github name: ', ghn);
+  // console.log('email: ', eml);
 
-  markdownText.concat(titleSection, badgeSection, bodySection, licenseSection, endOfDocSection);
-  console.log(markdownText);
+  let titleSection = renderTitleSection(filen);
+  let badgeSection = renderLicenseBadge(licn);
+  let bodySection = renderBody(descr, inst, usg);
+  let licenseSection = renderLicenseSection(licn, fulln);
+  let endOfDocSection = renderEndofDoc(contr, tst, ghn, eml);
+
+  // console.log(titleSection);
+  // console.log(badgeSection);
+  // console.log(bodySection);
+  // console.log(licenseSection);
+  // console.log(endOfDocSection);
+
+  // markdownText.concat(titleSection, badgeSection, bodySection, licenseSection, endOfDocSection); 
+  markdownText = (titleSection + badgeSection + bodySection + licenseSection + endOfDocSection); 
+  // console.log(markdownText); 
+  return markdownText;
 }
 
 module.exports = generateMarkdown;
