@@ -14,7 +14,7 @@ Purpose: This project was created to explore JavaScript ES6, node, module import
 
 ## Project Links
 GitHub Source Code: https://github.com/grudgecat/readme-generator  \
-Demo Video link: 
+Demo Video link: https://drive.google.com/file/d/1D673W24_5ib-TO4CEs0fhcQlHwxOwie2/view \
 
 ***
 ## Dependencies 

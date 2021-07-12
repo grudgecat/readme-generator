@@ -341,7 +341,6 @@ function generateMarkdown(fulln, filen, descr, inst, usg, licn, contr, tst, ghn,
   let endOfDocSection = renderEndofDoc(contr, tst, ghn, eml);
 
   markdownText = (titleSection + badgeSection + bodySection + licenseSection + endOfDocSection); 
-  console.log(markdownText); 
   return markdownText; 
 }
 

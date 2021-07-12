@@ -104,7 +104,6 @@ function writeToFile(fileName, data) {
 //function to check/correct for required .md file extension
 function checkForMDExt(fileName) {
   let chars = fileName.slice(-3);
-  console.log(chars);
   if (chars !== '.md') {
     fileName = (fileName + '.md');
     return fileName;
