@@ -3,6 +3,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
 
+//Set variables for user replies
 let fullName = "";
 let fileName = "";
 let description = "";
@@ -24,17 +25,17 @@ const questions = [
   {
     type: 'input',
     name: 'title',
-    message: 'What is the title for your Project ReadMe file?',
+    message: 'What is the title for your Project ReadMe file (must end with .md extension)?',
   },
   {
     type:'input',
     name: 'description',
-    message: 'Please enter a description for your project.'
+    message: 'Please enter a brief description for your project.'
   },
   {
-    type:'input',
+    type:'editor',
     name: 'installation',
-    message: 'Enter brief installation instructions for your project.'
+    message: 'Enter installation instructions for your project (opens an editor file for input).'
   },
   {
     type:'input',
@@ -48,14 +49,14 @@ const questions = [
     choices: ['Apache', 'Boost', 'BSD', 'GNU_GPLv2', 'GNU_GPLv3', 'MIT', 'Unlicense',],
   },
   {
-    type:'input',
+    type:'editor',
     name: 'contributing',
-    message: 'Enter brief instructions for how to contribute to this project.'
+    message: 'Enter brief instructions for how to contribute to this project(opens an editor file for input).'
   },
   {
-    type:'input',
+    type:'editor',
     name: 'tests',
-    message: 'Enter testing information for project.'
+    message: 'Enter testing information for project (opens an editor file for input).'
   },
   {
     type:'input',
@@ -69,6 +70,7 @@ const questions = [
   },
 ];
 
+//User inquirer to set user answers, THEN call init function to create readme/write to file
 inquirer  
   .prompt(questions)
   .then((data) => {
@@ -91,6 +93,7 @@ inquirer
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
+  // checkForMDExt(fileName);
   filepath=`./output/${fileName}`
   fs.writeFile(filepath,`
       ${data}
@@ -98,11 +101,23 @@ function writeToFile(fileName, data) {
       err ? console.error(err) : console.log('Success!'))
 }
 
+//function to check/correct for required .md file extension
+function checkForMDExt(fileName) {
+  let chars = fileName.slice(-3);
+  console.log(chars);
+  if (chars !== '.md') {
+    fileName = (fileName + '.md');
+    return fileName;
+  }
+}
+
 // TODO: Create a function to initialize app
 function init(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email) {
   //create text block for readme file
   let response = generateMarkdown(fullName, fileName, description, installation, usage, license, contributing, tests, githubName, email);
-  //use text block to generate readme file
+  //add .md file extention if left off
+  fileName = checkForMDExt(fileName);
+  //use generated text block to generate readme file
   writeToFile(fileName, response); 
 }
 
